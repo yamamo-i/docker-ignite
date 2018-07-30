@@ -1,0 +1,25 @@
+---
+version: '3.2'
+services:
+  # ignite
+  ignite:
+    container_name: ignite.local
+    image: "apacheignite/ignite:${IGNITE_VERSION}"
+    env_file:
+      - ignite/envfile
+    volumes:
+      - type: bind
+        source: ./ignite/config.xml
+        target: /etc/ignite/config.xml
+    ports:
+      - "10800:10800"
+      - "11211:11211"
+      - "47100:47100"
+      - "47500:47500"
+      - "49112:49112"
+  # zeppelin
+  zeppelin:
+    container_name: zeppelin.local
+    image: "apache/zeppelin:${ZEPPELIN_VERSION}"
+    ports:
+      - "8080:8080"
